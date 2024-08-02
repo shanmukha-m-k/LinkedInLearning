@@ -1,0 +1,26 @@
+<div class="content-box">
+  <form (ngSubmit)="onButtonClicked()">
+    <div>
+      <label for="name">Name : </label>
+      <input type="text" name="name" id="name" [(ngModel)]="name" />
+    </div>
+    <div>
+      <label for="description">Description : </label>
+      <input
+        type="text"
+        name="description"
+        id="description"
+        [(ngModel)]="description"
+      />
+    </div>
+    <div>
+      <label for="price">Price : </label>
+      <input type="text" name="price" id="price" [(ngModel)]="price" />
+    </div>
+    <div>
+      <button type="submit">
+        {{ buttonText }}
+      </button>
+    </div>
+  </form>
+</div>

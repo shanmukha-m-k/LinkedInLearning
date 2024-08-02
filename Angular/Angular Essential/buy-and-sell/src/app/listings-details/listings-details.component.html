@@ -1,14 +1,13 @@
 <div>
-    <div class="content-box">
-      <a routerLink="/listings">
-        <button>Back</button>
-      </a>
-      <h2>{{ listings?.name }}</h2>
-      <p>{{listings?.description}}</p>
-      <p>${{listings?.price}}</p>
-      <a routerLink="/contact/{{listings?.id}}">
-        <button>Contact Seller</button>
-      </a>
-
-    </div>
+  <div class="content-box">
+    <a routerLink="/listings">
+      <button>Back</button>
+    </a>
+    <h2>{{ listings?.name }}</h2>
+    <p>{{ listings?.description }}</p>
+    <p>${{ listings?.price }}</p>
+    <a routerLink="/contact/{{ listings?.id }}">
+      <button>Contact Seller</button>
+    </a>
   </div>
+</div>
