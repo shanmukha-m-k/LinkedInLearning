@@ -1,4 +1,4 @@
-package Model;
+package buyandsell.com.Model;
 
 import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;

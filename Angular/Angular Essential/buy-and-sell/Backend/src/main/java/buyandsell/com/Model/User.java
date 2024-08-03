@@ -1,4 +1,4 @@
-package Model;
+package buyandsell.com.Model;
 
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

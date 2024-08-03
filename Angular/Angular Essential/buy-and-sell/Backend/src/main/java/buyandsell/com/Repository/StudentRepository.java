@@ -1,6 +1,6 @@
-package Repository;
+package buyandsell.com.Repository;
 
-import Model.Student;
+import buyandsell.com.Model.Student;
 import java.util.*;
 
 import org.bson.types.ObjectId;
@@ -12,7 +12,7 @@ public interface StudentRepository extends MongoRepository<Student,UUID> {
   List<Student> findByName(String name);
   Student deleteById(ObjectId id);
 
-  boolean existById(ObjectId id);
+  boolean existsById(ObjectId id);
 
   Student findById(ObjectId id);
 

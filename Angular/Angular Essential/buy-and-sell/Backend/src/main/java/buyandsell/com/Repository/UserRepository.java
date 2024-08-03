@@ -1,6 +1,6 @@
-package Repository;
+package buyandsell.com.Repository;
 
-import Model.User;
+import buyandsell.com.Model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
