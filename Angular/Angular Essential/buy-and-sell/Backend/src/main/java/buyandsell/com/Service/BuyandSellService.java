@@ -1,12 +1,10 @@
 package buyandsell.com.Service;
 
 import buyandsell.com.Model.BuyAndSell;
-import buyandsell.com.Model.Student;
 import buyandsell.com.Repository.BuyandSellRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
-import org.bson.types.ObjectId;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +37,7 @@ public class BuyandSellService {
 
     buyAndSell = buyandSellRepository.save(buyAndSell);
     JSONObject listingsJson = new JSONObject(mapper.writeValueAsString(buyAndSell));
-    listingsJson.put("id", buyAndSell.getItemId());
+    listingsJson.put("itemId", buyAndSell.getItemId());
     responseJson.put("Save Item Response", listingsJson);
     return responseJson.toString();
   }
@@ -53,47 +51,47 @@ public class BuyandSellService {
 
 
   @Transactional
-  public String updateListings(int id, BuyAndSell listings, HttpServletResponse response)
+  public String updateListings(int itemId, BuyAndSell listings, HttpServletResponse response)
     throws JsonProcessingException, JSONException {
     JSONObject responseJson = new JSONObject();
     ObjectMapper mapper = new ObjectMapper();
     mapper.findAndRegisterModules();
-    BuyAndSell listings1 = buyandSellRepository.findById(id);
-    boolean exist = buyandSellRepository.existsById(id);
+    BuyAndSell listings1 = buyandSellRepository.findById(itemId);
+    boolean exist = buyandSellRepository.existsById(itemId);
 
     if (!exist) {
       response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 
     if (listings.getItemName() != null) {
-      listings1.setItemName(buyAndSell.getItemName());
-      listings1.setItemDescription(buyAndSell.getItemDescription());
-      listings1.setItemPrice(buyAndSell.getItemPrice());
+      listings1.setItemName(listings.getItemName());
+      listings1.setItemDescription(listings.getItemDescription());
+      listings1.setItemPrice(listings.getItemPrice());
       buyandSellRepository.save(listings1);
 
 
       JSONObject listingsJson = new JSONObject(mapper.writeValueAsString(listings1));
-      listingsJson.put("id", listings1.getItemId());
-      responseJson.put("Update Listings Response", listingsJson);
+      listingsJson.put("itemId", listings1.getItemId());
+      responseJson.put("UpdateListingsResponse", listingsJson);
     }
     return responseJson.toString();
 
   }
 
-  public String deleteById(int id,  HttpServletResponse response)
+  public String deleteById(int itemId,  HttpServletResponse response)
     throws  JSONException {
     JSONObject responseJson = new JSONObject();
     ObjectMapper mapper = new ObjectMapper();
     mapper.findAndRegisterModules();
 
-    boolean exist = buyandSellRepository.existsById(id);
+    boolean exist = buyandSellRepository.existsById(itemId);
 
     if (!exist) {
       response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
     else {
-      responseJson.put("deleted the student with id",id);
-      buyandSellRepository.deleteById(id);
+      responseJson.put("deleted the student with id",itemId);
+      buyandSellRepository.deleteById(itemId);
     }
     return responseJson.toString();
   }
