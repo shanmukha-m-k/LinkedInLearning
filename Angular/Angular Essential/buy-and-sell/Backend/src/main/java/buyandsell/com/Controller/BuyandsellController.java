@@ -4,6 +4,7 @@ import buyandsell.com.Model.BuyAndSell;
 import buyandsell.com.Service.BuyandSellService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletResponse;
+import org.bson.types.ObjectId;
 import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @CrossOrigin(origins = "*")
@@ -41,16 +43,16 @@ public class BuyandsellController {
   }
 
 
-  @PutMapping(path="/listings/{itemId}")
-  public String updateListings(@PathVariable("itemId") int itemId, @RequestBody BuyAndSell buyAndSell, HttpServletResponse response)
+  @PutMapping(path="/listings/{id}")
+  public String updateListings(@PathVariable("id") int id, @RequestBody BuyAndSell buyAndSell, HttpServletResponse response)
     throws JsonProcessingException, JSONException {
-    return  buyandSellService.updateListings(itemId,buyAndSell,response);
+    return  buyandSellService.updateListings(id,buyAndSell,response);
   }
 
-  @DeleteMapping(path = "/delete/{itemId}")
-  public String deleteListings(@PathVariable int itemId,HttpServletResponse response)
+  @DeleteMapping(path = "/delete/{id}")
+  public String deleteListings(@PathVariable int id, HttpServletResponse response)
     throws JSONException, JsonProcessingException {
-    return buyandSellService.deleteById(itemId,response);
+    return buyandSellService.deleteById(id,response);
   }
 
 }
