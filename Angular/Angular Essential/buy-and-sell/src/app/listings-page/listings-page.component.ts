@@ -16,6 +16,7 @@ export class ListingsPageComponent implements OnInit {
   constructor(private listingService:ListingServiceService){}
 
   ngOnInit(): void {
-this.listingService.getListing().subscribe(list=>this.listings=list)
+this.listingService.getAllListing().subscribe(list=>this.listings=list)
+console.log("sri",this.listings)
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { listings } from '../Model/listings';
 import { fakeListings, fakeMyListings } from '../../assets/dummy-data';
 import { CommonModule } from '@angular/common';
+import { ListingServiceService } from '../Service/listing-service.service';
 
 @Component({
   selector: 'app-listings-details',
@@ -13,11 +14,14 @@ import { CommonModule } from '@angular/common';
 })
 export class ListingsDetailsComponent implements OnInit {
   listings?: listings;
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private activatedRoute: ActivatedRoute,private listingService:ListingServiceService) {}
 
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.listingService.getListingById(id).subscribe(
+      listing=>{
+        this.listings=listing;
+      });
 
-    this.listings = fakeListings.find((listings) => listings.id === id);
   }
 }
