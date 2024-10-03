@@ -863,3 +863,150 @@ Rest Api; representational state transfer
 https://www.freecodecamp.org/news/what-is-rest-rest-api-definition-for-beginners/
 
 83.Types of Directives ?
+
+Directives are defined as classes that can add new behavior to the elements in the template or modify existing behavior.
+
+https://www.tatvasoft.com/outsourcing/2023/06/directives-in-angular.html
+
+84.Forms ?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-are-template-driven-forms
+
+85.Difference between container and container fluid ?
+
+Depending on the width of the viewport that the webpage is being viewed on, the container class gives its div a specific fixed width.
+ These lines don't exist in any form for container-fluid, so its width changes every time the viewport width changes.
+
+
+Use .container-fluid when you want your page to shapeshift with every little difference in its viewport size.
+
+Use .container when you want your page to shapeshift to only 4 kinds of sizes, which are also known as "breakpoints".
+
+86.How to access the single  value form the observable ?
+
+take(1) and first():
+These operators will complete the observable after emitting the first value.
+If the observable emits an error before emitting a value, first() will throw an error, while take(1) will simply complete without emitting a value.
+
+87.difference between map and flatmap in javascript ?
+
+flat()
+Purpose: Flattens a nested array by a specified depth.
+Syntax: array.flat(depth)
+Depth: Optional parameter, defaults to 1. Specifies how many levels deep the flattening should go.
+
+
+flatMap:
+Applies a function to each element of an array, and then flattens the result into a single array.
+It's useful when your transformation function returns an array for each element, and you want to combine them into a single array.
+
+map returns an array with the same structure as the original, while flatMap flattens the result into a single array.
+
+Use Case:
+Use map for simple transformations, and flatMap when dealing with nested arrays or when you need to flatten the result of a mapping operation.
+
+88.Types of JS datatypes ?
+
+A primitive data type is data that has a primitive value (which has no properties or methods). There are 7 types of primitive data types.
+
+string
+number
+boolean
+null
+undefined
+bigint
+symbol
+
+89.Utility classes in bootstrap ?
+utility/helper classes to quickly style elements without using any CSS code.
+Bootstrap includes dozens of utility classes for showing, hiding, aligning, and spacing content.
+
+90.scroll in 250px ?
+
+#container {
+height:250px;
+width:250px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+91.callback and higher order difference ?
+A higher-order function is a function that takes another function(s) as an argument(s) and/or returns a function to its callers.
+A callback function is a function that is passed to another function with the expectation that the other function will call it
+
+Or
+
+A callback function is a function that is passed to another function as an argument and executed after that function completes its task.
+A higher-order function (HOF) is a function that takes one or more functions as arguments or returns a function as a result
+
+92.What is content projection ?
+Content projection is a pattern in which you insert, or project, the content you want to use inside another component.
+
+The ng-content is used to insert the content dynamically inside the component that helps to increase component reusability.
+
+93.Html Tags,Elements,Attributes ?
+HTML Tags are the starting and ending parts of an HTML element. They begin with < symbol and end with > symbol. Whatever is written inside < and > are called tags.
+
+The HTML element consists of both the opening and closing tags as well as what’s inside those tags. It normally consists of some structure that’s used to define the respective tags.
+
+HTML Attributes is used to define the character of an HTML element. It always placed in the opening tag of an element.
+It generally provides additional styling (attribute) to the element.
+
+94.Css Box Model ?
+
+The CSS box model refers to how HTML elements are modeled in browser engines and how the dimensions of those HTML elements are derived from CSS properties.
+The CSS box model is a container that contains multiple properties including borders, margin, padding, and the content itself. 
+It is used to create the design and layout of web pages.
+
+95.Javascript Fetch ?
+The Fetch API interface allows web browser to make HTTP requests to web servers.
+The fetch() method returns a Promise that resolves to a Response object.
+
+The fetch() function is at the core of this API, and it takes one mandatory argument – the URL of the resource you want to fetch.
+Optionally, you can include an object as the second argument, where you can specify various settings such as the HTTP method, headers, and more.
+
+fetch(apiUrl, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(formData),
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(newUserData => {
+    // Process the newly created user data
+    console.log('New User Data:', newUserData);
+  })
+ }
+ 
+96.Async and await ?
+
+https://www.freecodecamp.org/news/javascript-async-await/
+
+97.Version of angular and node ?
+18 angular and 21 node
+
+98.Functional and block scope ?
+
+Function scope: Variables that are declared inside a function are called local variables and in the function scope. Local variables are accessible anywhere inside the function.
+Block scope: Variable that is declared inside a specific block & can't be accessed outside of that block.
+
+99.Webpack ?
+ webpack is module bundler .
+ a tool for modeling /bundeling the source code in conventional chuncks these are again loaded from server to browser.
+ 
+Bundling happens during build .there are 5 bundles are produced
+ 1.inline bundle.js - these scripts are necessary to run the bundle.
+ 2.polyfills -these are required for cross browser compatibality or version compatibality.
+ 3.main- whole appln code is present in main
+ 4.style -for styling the appln
+ 5. vendor - all the 3rd party angular library.
+ 
+100.How angular appln executes ?
+
+https://medium.com/siam-vit/how-an-angular-app-work-behind-the-scenes-angular-flow-dcc4d1df27bd
