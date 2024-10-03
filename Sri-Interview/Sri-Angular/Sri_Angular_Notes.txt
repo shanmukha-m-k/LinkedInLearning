@@ -542,9 +542,324 @@ A Subject is a Special type of Observable that allows value to be multicasted to
 
 AuthGuard is an angular route guard used to protect the routes from unauthenticated/unauthorized people.
 
-5 Different types of Route Guards are as follows:
+Different types of Route Guards are as follows:
 
 CanActivate – Controls if a route can  be activated 
 CanActivateChild – Controls if children of the route can be activated 
 CanDeactivate – Controls if the user can leave the route
 CanLoad – Controls if the route be loaded 
+
+https://medium.com/@hish.abdelshafouk/route-guards-in-angular-c9da0d815ef4
+
+59.what is the use of http interceptor calls ?
+
+Http Interceptors are part of @angular/common/http, which inspect and transform HTTP requests from your application to the server and vice-versa on HTTP responses.
+These interceptors can perform a variety of implicit tasks, from authentication to logging.
+
+The HTTP Interceptors can be used for different variety of tasks,
+
+Authentication
+Logging
+Caching
+Fake backend
+URL transformation
+Modifying headers
+
+60.what is view encapsulation ?
+
+In Angular, view encapsulation determines how a component's styles are scoped and applied.
+ It prevents styles from one component from leaking into other components and vice versa.
+ 
+Angular provides three view encapsulation strategies:
+Emulated (default):
+This is the default strategy, which emulates the behavior of Shadow DOM. 
+It adds unique attributes to the component's host element and its styles, effectively scoping them to that component.
+
+ShadowDom:
+This strategy uses the native Shadow DOM API provided by the browser. 
+It provides true isolation for component styles, ensuring that they are completely independent of the rest of the application's styles.
+
+None:
+This strategy disables view encapsulation altogether. Styles defined in the component will be applied globally, affecting the entire application.
+
+61.securites for angular ?
+
+You should avoid direct use of the DOM APIs.
+You should enable Content Security Policy (CSP) and configure your web server to return appropriate CSP HTTP headers.
+You should Use the offline template compiler.
+You should Use Server Side XSS protection.
+You should Use DOM Sanitizer.
+You should Preventing CSRF or XSRF attacks.
+
+62.how to incresase performance in angular ?
+
+https://medium.com/@chandrabhushan1323/how-to-improve-angular-application-performance-fadde3890e71
+
+63.settimeout and setinteval ?
+
+Execution: setTimeout executes only once, while setInterval executes repeatedly.
+Stopping: setTimeout doesn't need to be stopped, as it only runs once. setInterval needs to be stopped using clearInterval() to prevent it from running indefinitely.
+Timing: setTimeout guarantees a minimum delay before execution, but the actual time may be longer due to other processes running in the browser. 
+setInterval tries to execute the function at the specified interval, but if the previous execution takes longer than the interval, 
+the next execution will happen immediately after the previous one finishes.
+
+64.splice slice difference ?
+
+splice:
+Purpose: Modifies the contents of an array by removing or replacing existing elements and/or adding new elements in place.
+Syntax: array.splice(start, deleteCount, item1, item2, ...)
+Parameters:
+start: The index at which to start changing the array.
+deleteCount: The number of elements to remove. If 0, no elements are removed.
+item1, item2, ...: The elements to add to the array, starting at the start index.
+Return Value: An array containing the deleted elements (if any).
+
+const fruits = ["apple", "banana", "cherry", "date"];
+
+const removedFruits = fruits.splice(1, 2, "grape", "kiwi"); // ["banana", "cherry"]
+
+console.log(fruits); // ["apple", "grape", "kiwi", "date"] (original array is modified)
+console.log(removedFruits); // ["banana", "cherry"]
+
+Immutability vs. Mutability:
+slice creates a new array, leaving the original array untouched, while splice modifies the original array directly.
+
+Purpose:
+slice is for extracting a portion of an array, while splice is for adding, removing, or replacing elements within an array.
+
+Return Value:
+slice returns a new array containing the extracted elements, while splice returns an array containing the deleted elements (if any)
+
+65.find findIndex ?
+
+https://www.w3schools.com/jsref/jsref_findindex.asp
+
+66.getter setter ?
+
+In JavaScript, accessor properties are methods that get or set the value of an object. For that, we use these two keywords:
+
+get - to define a getter method to get the property value
+set - to define a setter method to set the property value
+
+const student = {
+
+    // data property
+    firstName: 'Monica',
+    
+    // accessor property(getter)
+    get getName() {
+        return this.firstName;
+    }
+};
+
+// accessing data property
+console.log(student.firstName); // Monica
+
+
+
+
+
+const student = {
+    firstName: 'Monica',
+    
+    //accessor property(setter)
+    set changeName(newName) {
+        this.firstName = newName;
+    }
+};
+
+console.log(student.firstName); // Monica
+
+67.exception handling ?
+try…catch statements
+try…catch…finally statements.
+
+68.http error interceptor ?
+An error interceptor is a special type of interceptor which is used for handling errors that arise while making an HTTP request.
+The error may come in either the client-side (browser) or it may be an error from the server-side when the request fails due to any reason.
+
+req – The outgoing request object to handle.
+next – The next interceptor in the chain, or the backend if no interceptors remain in the chain.
+Returns: an observable of the event stream.
+ 
+69.keyClock ?
+Keycloak is an open-source Identity and Access Management (IAM) solution that can be seamlessly integrated with Angular applications.
+It provides a robust and comprehensive set of features for managing user authentication, authorization, and single sign-on (SSO).
+
+70.unit test case for parent and children ?
+
+
+Imports: Import necessary modules from Angular testing library and the components under test.
+
+beforeEach: Configure the testing module, declaring both parent and child components.
+
+it('should create'): Tests if the parent component is created successfully.
+
+it('should pass data to child component'):
+Sets the dataToChild property on the parent component.
+
+Detects changes to trigger Angular's change detection mechanism.
+Gets a reference to the child component instance using By.directive.
+
+Asserts that the dataFromParent property on the child component matches the data passed from the parent.
+
+it('should receive data from child component'):
+
+Gets a reference to the child component instance.
+Emits an event from the child component using dataEmitter.
+Detects changes.
+Asserts that the dataFromChild property on the parent component matches the data emitted by the child.
+
+71.What is the USe of Angular Polyfills ? 
+
+polyfills are js scripts or modules included in tha angular appln to ensure old browser compatibality.
+
+it enables angular appln to run smoothly and consistently across differnt environment.
+
+it deals with isuuses of not supporting modern futures of js in older browser like promise , observables  and other modern js apis .
+
+Zone.js is a critical part of Angular's change detection mechanism.
+ It is a JavaScript library that provides execution context and hooks into asynchronous operations.
+ In simpler terms, Zone.js helps Angular keep track of all the asynchronous tasks and events that occur in your application and manage their execution.
+ 
+72.Explain View Child And Children ?
+
+ViewChild and ViewChildren are decorators in Angular that allow you to access and manipulate components, directives, and DOM elements:
+
+ViewChild
+Returns the first matching component. You can use this to access a child component's properties and methods, or to query one element from the DOM.
+
+ViewChildren
+Returns all matching components as a QueryList of items. You can use this to access multiple elements.
+
+73.What are the Contents In Angular.Json ?
+
+The angular.json file is the configuration file for your Angular workspace and projects. Here's an overview of the main sections and their contents:
+
+Top-Level Properties:
+
+version: The version of the configuration file format.
+newProjectRoot: The default directory for newly generated projects within the workspace.
+defaultProject: The name of the default project in the workspace.
+cli: Contains configuration options for the Angular CLI itself.
+schematics: Defines schematics configurations for generating code with the CLI.
+projects: Contains configuration for each project in the workspace.
+
+Project-Specific Properties (within projects):
+
+projectType: The type of project (application or library).
+root: The root directory of the project.
+sourceRoot: The directory containing the project's source files.
+prefix: The prefix used for components and directives generated within the project.
+architect: Contains configurations for various build, serve, and test targets for the project.
+
+Architect Targets:
+
+build: Configuration for building the project.
+serve: Configuration for serving the project locally.
+test: Configuration for running unit tests.
+e2e: Configuration for running end-to-end tests.
+lint: Configuration for linting code.
+
+74.Print the duplicate characters in given String type array ?
+
+let duplicate=(str)=>{
+    let count=1;
+    let res=" ";
+
+    for(let i=0;i<str.length;i++){
+        if(str[i]==str[i+1]){
+            count++;
+            res=str[i];
+        }  
+    }
+    if(count>1){
+        console.log(res + ", count = " + count);
+    }
+}
+
+duplicate("hello");
+
+
+example 2 : 
+
+const duplicateChar = (str) => {
+    const duplicate = {}
+    for (charcter of str) {
+        duplicate[charcter] = (duplicate[charcter] || 0) + 1;
+    }
+    return Object.entries(duplicate).
+        filter(([key, value]) => value > 1).
+        map(([key, value]) => value.length);
+
+}
+
+console.log(duplicateChar("heello"));
+
+75.Inter Components Communication ?
+
+Parent-Child component communication
+Observable as a service
+Event Bus
+
+https://rajath8venkatesh.medium.com/inter-component-communication-in-angular-e99e9c939446
+
+
+
+https://github.com/sudheerj/javascript-interview-questions?tab=readme-ov-file#what-is-an-async-function
+
+76.Calling api before components initialized ?
+
+https://medium.com/@mohd2sh/load-data-before-the-app-starts-in-angular-2-3b1927aa502c
+
+77. Signals ? 
+
+A signal is a wrapper around a value that can notify interested consumers when that value changes. 
+Signals can contain any value, from simple primitives to complex data structures.
+it works on the principle of CD ;
+let x=signal(5);
+it provide notification when value is changed.
+
+78.rxjs opertors and Higher order ?
+
+Higher-Order Mapping: These are Rxjs operators used to map source observable values into other observables
+*mergeMap,concatMap,switch map.
+
+https://blog.stackademic.com/rxjs-operators-in-angular-af796f8e7921
+
+79.Diiference between map,filter ,foreach and reduce ?
+
+https://mathursanb.medium.com/map-vs-filter-vs-reduce-in-js-5977e0729039
+let students = [
+    { id: 1212, name: 'John' , course:"IT",marks:87},
+    { id: 2421, name: 'Peter', course:"SE",marks:88},
+    { id: 2632, name: 'Kevin', course:"SE",marks:86},
+    { id: 4834, name: 'Sam',   course:"IT",marks:85}
+];
+
+let tot = students.reduce((acc,student)=>{
+     console.log(acc)
+     return student.marks + acc
+},0)
+
+forEach 2 doesn’t return anything, reduce 1 returns the result of running the reducer callback function.
+
+80.Standalone components ?
+A standalone component is a type of component which is not part of any Angular module. It provides a simplified way to build Angular applications.
+
+81.What is javascript and how it works ?
+
+JavaScript is a scripting or programming language that allows you to implement complex features on web pages
+https://www.freecodecamp.org/news/how-javascript-works-behind-the-scenes
+
+82.Types of Api ?
+openaApi-rest
+private 
+partner 
+composit
+
+Rest Api; representational state transfer
+
+https://www.freecodecamp.org/news/what-is-rest-rest-api-definition-for-beginners/
+
+83.Types of Directives ?
