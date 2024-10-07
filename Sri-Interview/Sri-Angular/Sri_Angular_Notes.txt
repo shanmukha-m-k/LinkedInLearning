@@ -1,0 +1,1012 @@
+1. Hositing ?
+
+Hoisting is a JavaScript mechanism where variables, function declarations and classes are moved to the top of their scope before code execution.
+Remember that JavaScript only hoists declarations, not initialisation.
+
+2. Closure ?
+A closure is the combination of a function bundled(enclosed) together with its lexical environment within which that function was declared.
+ i.e, It is an inner function that has access to the outer or enclosing function’s variables,
+ functions and other data even after the outer function has finished its execution. The closure has three scope chains.
+
+Own scope where variables defined between its curly brackets
+Outer function's variables
+Global variables
+
+3. Currying ?
+
+Currying is the process of taking a function with multiple arguments and turning it into a sequence of functions each with only a single argument. 
+Currying is named after a mathematician Haskell Curry. By applying currying, an n-ary function turns into a unary function.
+
+const multiArgFunction = (a, b, c) => a + b + c;
+console.log(multiArgFunction(1, 2, 3)); // 6
+
+const curryUnaryFunction = (a) => (b) => (c) => a + b + c;
+curryUnaryFunction(1); // returns a function: b => c =>  1 + b + c
+curryUnaryFunction(1)(2); // returns a function: c => 3 + c
+curryUnaryFunction(1)(2)(3); // returns the number 6
+
+4.differene between const and obj.freeze?
+const and Object.freeze() are not the same, const prevents reassignment and Object.freeze() prevents mutability
+
+const is there for declaring a variable which has to assinged right away and can't be reassigned. 
+variables declared by const are block scoped and not function scoped like variables declared with var
+Object.freeze() is a method which accepts an object and returns the same object. Now the object cannot have any of its properties removed or any new properties added.
+
+5.Promises ?
+
+A promise is an object that may produce a single value some time in the future with either a resolved value or a reason that it’s not resolved(for example, network error).
+It will be in one of the 3 possible states: fulfilled, rejected, or pending.
+
+const promise = new Promise(
+  (resolve) => {
+    setTimeout(() => {
+      resolve("I'm a Promise!");
+    }, 5000);
+  },
+  (reject) => {}
+);
+
+promise.then((value) => console.log(value));
+
+Promises are used to handle asynchronous operations.
+They provide an alternative approach for callbacks by reducing the callback hell and writing the cleaner code.
+
+
+
+A callback function is a function passed into another function as an argument. 
+This function is invoked inside the outer function to complete an action. Let's take a simple example of how to use callback function
+ 
+function callbackFunction(name) {
+  console.log("Hello " + name);
+}
+
+function outerFunction(callback) {
+  let name = prompt("Please enter your name.");
+  callback(name);
+}
+
+outerFunction(callbackFunction); 
+
+6.difference between subject v/s observable and behaviour subject
+
+
+Observables are declarative which provide support for passing messages between publishers and subscribers in your application.
+They are mainly used for event handling, asynchronous programming, and handling multiple values.
+In this case, you define a function for publishing values, but it is not executed until a consumer subscribes to it.
+The subscribed consumer then receives notifications until the function completes, or until they unsubscribe.
+ 
+ 
+ 
+An RxJS Subject is a special type of Observable that allows values to be multicasted to many Observers.
+While plain Observables are unicast (each subscribed Observer owns an independent execution of the Observable), Subjects are multicast.
+
+A Subject is like an Observable, but can multicast to many Observers.
+Subjects are like EventEmitters: they maintain a registry of many listeners.
+subject emit new value through next() method and listners get the notification.
+it won't store pervious value.
+ 
+
+ import { Subject } from 'rxjs';
+
+   const subject = new Subject<number>();
+
+   subject.subscribe({
+     next: (v) => console.log(`observerA: ${v}`)
+   });
+   subject.subscribe({
+     next: (v) => console.log(`observerB: ${v}`)
+   });
+
+   subject.next(1);
+   subject.next(2);
+   
+Behavioural subject supports generic value and default value. It is a special type of subject  the subscriber gets last init or published value.(Only one)
+
+Replay Subject last init or published (more than one ) values.
+ i.e we need to pass the number of values to be stored . It uses buffer size to keep the no% item to store. 
+
+
+observable
+1)we need a seperate observer interface to feed an observal source/
+observables can't be consumers
+2)they are cold they can emit the data only when there is subscriber
+3)unicast by default
+
+ 
+
+subject
+1)implements both observable and observer interface/subject can be both consumer and provider
+2)subject is hot it emits the data even if there is no subscriber
+3)subjects are multicasting
+
+ 
+
+Observable: Subscribe to it to get the values
+Subject: Same but you also have control of the values that you want to emit into it (can subscribe to it but also emit)
+ReplaySubject: Same as subject but will keep track of the N latest emitted values and every time you subscribe to it, it'll emit those N values
+BehaviorSubject: Subject where you have to set a default value, if you subscribe to it before anything has been emitted you'll get the default value
+
+7.rxjs operators ?
+
+https://medium.com/@akbar123jason/mastering-rxjs-operators-in-angular-the-top-20-operators-ca2b8d13a2cb
+
+
+https://medium.com/@mlkpatel0/rxjs-operators-in-angular-fd199de5143e
+
+8.debounce and throttling ?
+
+Debouncing is a programming pattern that allows delaying execution of some piece of code until a specified time to avoid unnecessary CPU cycles and API calls.
+This in turn enhance the web page performance. The debounce function make sure that your code is only triggered once per user input.
+The common usecases are Search box suggestions, text-field auto-saves, and eliminating double-button clicks.
+ 
+Throttling is a technique used to limit the execution of an event handler function in a given period of time,
+even when this event triggers continuously due to user actions.
+The common use cases are browser resizing, window scrolling, mouse movements etc.
+ 
+9.hot and cold observable ?
+ 
+Cold observables have their data produced inside the observable.
+
+Hot observables have their data produced outside the observable.
+
+Cold Observables only emit data once subscribed to;
+
+Hot Observables emit values even before the subscription is made. Used when sharing data among many subscribers.
+
+10.why typscript used in javascript
+It is a superset of JavaScript that adds strong type checking and is compiled into plain JavaScript code.
+Being a superset means that TypeScript has all the features of JavaScript as well as some additional features.
+TypeScript comes with features such as better development-time tooling, static code analysis, compile-time type checking, and code-level documentation.
+
+11.different ways to create the object?
+https://github.com/sudheerj/javascript-interview-questions?tab=readme-ov-file#what-are-the-possible-ways-to-create-objects-in-javascript
+
+12.if we want to show one page inside another web page?  iframe
+
+13.different type of Doctype in html<!Doctype Html>
+
+https://www.geeksforgeeks.org/what-are-the-different-kinds-of-doctypes-available/
+
+14.how to remove the element from the array nth index?
+
+https://www.freecodecamp.org/news/how-to-remove-an-element-from-a-javascript-array-removing-a-specific-item-in-js/
+
+15.what are the ways we can maintain state in javascript?
+
+a state simply refers to the status of a system or an application at a specific moment.
+For instance, if you are logged in a website, the website is in an "authenticated" state. If you log out, the website is in an "unauthenticated" state.
+
+In JavaScript, you can maintain state using various methods, depending on the complexity and scope of your application:
+1. Local Component State (For UI Libraries/Frameworks):
+Angular: @Component decorator's state property or the @ngrx/store library for centralized state management.
+
+2. Global State Management Libraries:
+Redux: A predictable state container for JavaScript apps.
+
+3. Simple Variables and Objects:
+For smaller applications, you can use plain JavaScript variables or objects to store state.
+
+4. Local Storage and Session Storage:
+For persisting state across sessions, you can use the browser's local storage or session storage.
+
+Choosing the Right Method:
+Local state: If the state is only needed within a single component, use local state.
+Global state: If the state needs to be shared between multiple components, consider a global state management library .
+Persistence: If you need to persist state across sessions, use local storage or session storage.
+
+16.what is event flow in javascript ?
+Event flow is the order in which event is received on the web page.
+When you click an element that is nested in various other elements, before your click actually reaches its destination, or target element,
+it must trigger the click event for each of its parent elements first, starting at the top with the global window object.
+
+There are two ways of event flow
+
+Top to Bottom(Event Capturing)
+Bottom to Top (Event Bubbling)
+
+
+Event bubbling is a type of event propagation where the event first triggers on the innermost target element,
+and then successively triggers on the ancestors (parents) of the target element 
+in the same nesting hierarchy till it reaches the outermost DOM element(i.e, global window object).
+
+
+Event capturing is a type of event propagation where the event is first captured by the outermost element, 
+and then successively triggers on the descendants (children) of the target element
+in the same nesting hierarchy till it reaches the innermost target DOM element.
+
+You need to pass true value for addEventListener method to trigger event handlers in event capturing phase.
+
+<div>
+  <button class="child">Hello</button>
+</div>
+
+<script>
+  const parent = document.querySelector("div");
+  const child = document.querySelector(".child");
+
+  parent.addEventListener("click",
+    function () {
+      console.log("Parent");
+    },
+    true
+  );
+
+  child.addEventListener("click", function () {
+    console.log("Child");
+  });
+</script>
+// Parent
+// Child
+
+17.what is the difference between null and undefined ?
+
+https://github.com/sudheerj/javascript-interview-questions?tab=readme-ov-file#what-is-the-difference-between-null-and-undefined
+
+18.how we redirect to new page in javascript?  window.location.href 
+
+19.what is calback method in javascript? A JavaScript callback is a function which is to be executed after another function has finished execution.
+
+20.what is use of !!?
+
+It converts value into boolean i.e null ,0 ,undefined into false other values into true. 
+
+It's a way of casting a "truthy" or "falsy" value to true or false , respectively
+
+21.what are key components in angular ?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-are-the-key-components-of-angular
+
+22.what are directives in angular ?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-are-directives
+
+23)what is lazy loading and how to achieve it??
+
+Lazy loading is a technology of angular that allows you to load JavaScript components when a specific route is activated
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-is-lazy-loading
+
+24.lifecycle hooks in angular ?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-are-lifecycle-hooks-available
+
+https://www.freecodecamp.org/news/angular-lifecycle-hooks/
+
+25. what is the use of constructor in angular ?
+ 
+ 1. Dependency Injection:
+Constructors are the primary mechanism for injecting dependencies into Angular components, services, and directives.
+By specifying the dependencies as constructor parameters,
+Angular's dependency injection system automatically provides the required instances when the class is instantiated.
+
+2. Simple Initialization:
+You can use constructors to initialize class properties with simple values or perform basic setup tasks that don't depend on external dependencies.
+
+26.what is metadata in angular ?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-is-metadata
+
+27.what is dependency injection in angular ?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-is-dependency-injection-in-angular
+
+28.how to make service as singleton in angular ?
+
+The preferred way to create a singleton service is to set providedIn to root on the service's @Injectable() decorator.
+This tells Angular to provide the service in the application root. 
+
+29.If we use script tag in html template then wat will happen ?
+
+Angular recognizes the value as unsafe and automatically sanitizes it, which removes the script tag but keeps safe content such as the text content of the script tag.
+
+30.difference between pure and impure pipes ?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-is-the-difference-between-pure-and-impure-pipe
+
+31.how to append the token to each http request? 
+
+add the inteseptor which accepets the request and respose with the header
+
+32.can we have multiple interceptor? 
+
+yes on it own scope like for setting the header and for error handling
+
+33.what type of compiler? 
+
+The Angular compiler is used to convert the application code into JavaScript code.
+It reads the template markup, combines it with the corresponding component class code, and emits component factories which creates JavaScript representation of the component
+along with elements of @Component metadata. 
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-are-different-types-of-compilation-in-angular
+
+34.how to add dynamic script in angular?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#how-to-inject-the-dynamic-script-in-angular
+
+35.what are the class decorator in angular?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-are-the-class-decorators-in-angular
+
+36.types of validators ?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-are-the-types-of-validator-functions
+
+
+37.type of injector hiearchy ?
+
+ModuleInjector hierarchy: It configure on a module level using an @NgModule() or @Injectable() annotation.
+
+ElementInjector hierarchy: It created implicitly at each DOM element. Also it is empty by default unless you configure it in the providers property on @Directive() or @Component().
+
+38.in which all scenerio change detection works?
+
+Events: When an event like a click or submit is fired 
+
+Asynchronous JavaScript functions: When an asynchronous JavaScript function like setTimeOut() or setInterval() is executed 
+
+DOM events: When a DOM event like a click or hover over occurs 
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-are-the-ways-to-trigger-change-detection-in-angular
+
+39.reverse a string without built in function? let output="";
+for(let i=a.length-1;i>=0;i--){
+    output+=a[i]
+}
+with builtin
+a.split("").reverse().join("")
+
+40.find v/s filter v/s map
+
+map returns an array with the same length,
+
+filter as the name implies, it returns an array with less items than the original array
+
+reduce returns a single value (or object)
+
+find returns the first items in an array that satisfies a condition
+
+41.what is content projection ?
+
+Content projection is a pattern in which you insert, or project, the content you want to use inside another component.
+
+42.what is z-index in css?
+ overlapping
+ 
+The z-index property specifies the stack order of an element.
+
+An element with greater stack order is always in front of an element with a lower stack order.
+
+43.what is opacity? tranparency
+
+Any <number> strictly between 0 and 1 . default value is 1
+
+44.difference between flex and grid?
+
+Flexbox Layout is that flexbox was designed for layout in one dimension - either a row or a column.
+
+Grid was designed for two-dimensional layout - rows, and columns at the same time
+
+45.what is pseduo code/ pseduo class?
+
+it is a keyword added to the selector that specify the special state of the selected element. host .ngdeep, hover in css.
+
+46.let and var difference?
+
+https://github.com/sudheerj/javascript-interview-questions?tab=readme-ov-file#what-is-the-difference-between-let-and-var
+
+47.different operators in javascript ?
+
+i.e spead opeartor and rest operatore
+
+Rest parameter is an improved way to handle function parameters which allows us to represent an indefinite number of arguments as an array.
+function f(a, b, ...theArgs) {
+  // ...
+}
+
+Spread operator allows iterables( arrays / objects / strings ) to be expanded into single arguments/elements.
+
+function calculateSum(x, y, z) {
+  return x + y + z;
+}
+
+const numbers = [1, 2, 3];
+
+console.log(calculateSum(...numbers)); // 6
+
+48.shallow copy and deep copy ?
+var empDetailsShallowCopy = empDetails; //Shallow copying!
+empDetailsShallowCopy.name = "Johnson";
+The above statement will also change the name of empDetails, since we have a shallow copy. That means we're losing the original data as well.
+
+var empDetailsDeepCopy = {
+  name: empDetails.name,
+  age: empDetails.age,
+  expertise: empDetails.expertise,
+};
+
+Now if you change empDetailsDeepCopy.name, it will only affect empDetailsDeepCopy & not empDetails
+
+A deep copy means that all of the values of the new variable are copied and disconnected from the original variable.
+A shallow copy means that certain (sub-)values are still connected to the original variable.
+
+49.object methods in javacscript ?
+
+// Copies properties from a source object to a target object
+Object.assign(target, source)
+
+// Creates an object from an existing object
+Object.create(object)
+
+// Returns an array of the key/value pairs of an object
+Object.entries(object)
+
+// Creates an object from a list of keys/values
+Object.fromEntries()
+
+// Returns an array of the keys of an object
+Object.keys(object)
+
+// Returns an array of the property values of an object
+Object.values(object)
+
+50.arrow function limitation ?
+
+No own "this" context:
+Unlike traditional functions, arrow functions do not create their own "this" context.
+it will refer this to parent context or surrounding context.
+
+const person = {
+
+  name: "John",
+
+  greet: () => {
+
+    console.log(this.name); // This will print "undefined" because the arrow function inherits the "this" from the global scope
+
+  }
+
+};
+
+
+
+person.greet(); // Outputs: "undefined" 
+
+51.temporal dead zone? 
+
+The Temporal Dead Zone(TDZ) is a specific period or area of a block where a variable is inaccessible until it has been initialized with a value.
+This behavior in JavaScript that occurs when declaring a variable with the let and const keywords, but not with var.
+In ECMAScript 6, accessing a let or const variable before its declaration (within its scope) causes a ReferenceError.
+
+function somemethod() {
+  console.log(counter1); // undefined
+  console.log(counter2); // ReferenceError
+  var counter1 = 1;
+  let counter2 = 2;
+}
+
+52.Scope ?
+
+Scope is the accessibility of variables, functions, and objects in some particular part of your code during runtime.
+In other words, scope determines the visibility of variables and other resources in areas of your code.
+
+53.variable without let const and var?
+
+When you declare a variable without a keyword, it becomes a global variable. 
+This means it's attached to the global object (window in browsers), potentially causing naming conflicts and making your code harder to manage.
+
+54.types of promise?  
+
+fulfilled - action is fulfilled
+rejected - action failed
+pending - action hasn’t succeeded or failed yet
+settled - action is either fulfilled or rejected
+
+55.for of and for in ?
+
+for..in returns a list of keys on the object being iterated, whereas for..of returns a list of values of the numeric properties of the object being iterated.
+
+56. Session and local storage ?
+
+Session storage
+Data is only available for the current session, which ends when the page is closed or the tab is closed. 
+Each tab has its own separate session storage, so if the same site is opened in multiple tabs, each tab will have its own data. 
+
+Local storage
+Data persists across sessions and visits, and is only deleted when explicitly deleted or by the user. 
+Local storage can have a storage capacity of 5–10 MB per domain
+
+57.benefits of subject in angular ?
+
+* muticasting * component communication * improved reactive programming 
+
+Holding Values
+If you subscribe to an subject, you won’t get the current value or initial value.
+But when you subscribe to an Behavior Subject, you will be able to get the current value or the initial value.
+
+ 
+
+Defining Values
+You don’t have to define a default value whenever you declare the subject.
+But you have to define a default value whenever you declare Behavior Subject based upon the data type.
+
+ 
+
+Subscribers
+In Subject, each next subscribers receive only the upcoming values.
+In Behavior Subject, each next subscribers receive one previous value and upcoming values.
+
+A Subject is like an Observable but can multicast to many observers which means subject is at the same time an Observable and an Observer.
+A Subject is a Special type of Observable that allows value to be multicasted to many Observers. Subject are like event emitters.
+
+58.gurads in angular ?
+
+AuthGuard is an angular route guard used to protect the routes from unauthenticated/unauthorized people.
+
+Different types of Route Guards are as follows:
+
+CanActivate – Controls if a route can  be activated 
+CanActivateChild – Controls if children of the route can be activated 
+CanDeactivate – Controls if the user can leave the route
+CanLoad – Controls if the route be loaded 
+
+https://medium.com/@hish.abdelshafouk/route-guards-in-angular-c9da0d815ef4
+
+59.what is the use of http interceptor calls ?
+
+Http Interceptors are part of @angular/common/http, which inspect and transform HTTP requests from your application to the server and vice-versa on HTTP responses.
+These interceptors can perform a variety of implicit tasks, from authentication to logging.
+
+The HTTP Interceptors can be used for different variety of tasks,
+
+Authentication
+Logging
+Caching
+Fake backend
+URL transformation
+Modifying headers
+
+60.what is view encapsulation ?
+
+In Angular, view encapsulation determines how a component's styles are scoped and applied.
+ It prevents styles from one component from leaking into other components and vice versa.
+ 
+Angular provides three view encapsulation strategies:
+Emulated (default):
+This is the default strategy, which emulates the behavior of Shadow DOM. 
+It adds unique attributes to the component's host element and its styles, effectively scoping them to that component.
+
+ShadowDom:
+This strategy uses the native Shadow DOM API provided by the browser. 
+It provides true isolation for component styles, ensuring that they are completely independent of the rest of the application's styles.
+
+None:
+This strategy disables view encapsulation altogether. Styles defined in the component will be applied globally, affecting the entire application.
+
+61.securites for angular ?
+
+You should avoid direct use of the DOM APIs.
+You should enable Content Security Policy (CSP) and configure your web server to return appropriate CSP HTTP headers.
+You should Use the offline template compiler.
+You should Use Server Side XSS protection.
+You should Use DOM Sanitizer.
+You should Preventing CSRF or XSRF attacks.
+
+62.how to incresase performance in angular ?
+
+https://medium.com/@chandrabhushan1323/how-to-improve-angular-application-performance-fadde3890e71
+
+63.settimeout and setinteval ?
+
+Execution: setTimeout executes only once, while setInterval executes repeatedly.
+Stopping: setTimeout doesn't need to be stopped, as it only runs once. setInterval needs to be stopped using clearInterval() to prevent it from running indefinitely.
+Timing: setTimeout guarantees a minimum delay before execution, but the actual time may be longer due to other processes running in the browser. 
+setInterval tries to execute the function at the specified interval, but if the previous execution takes longer than the interval, 
+the next execution will happen immediately after the previous one finishes.
+
+64.splice slice difference ?
+
+splice:
+Purpose: Modifies the contents of an array by removing or replacing existing elements and/or adding new elements in place.
+Syntax: array.splice(start, deleteCount, item1, item2, ...)
+Parameters:
+start: The index at which to start changing the array.
+deleteCount: The number of elements to remove. If 0, no elements are removed.
+item1, item2, ...: The elements to add to the array, starting at the start index.
+Return Value: An array containing the deleted elements (if any).
+
+const fruits = ["apple", "banana", "cherry", "date"];
+
+const removedFruits = fruits.splice(1, 2, "grape", "kiwi"); // ["banana", "cherry"]
+
+console.log(fruits); // ["apple", "grape", "kiwi", "date"] (original array is modified)
+console.log(removedFruits); // ["banana", "cherry"]
+
+Immutability vs. Mutability:
+slice creates a new array, leaving the original array untouched, while splice modifies the original array directly.
+
+Purpose:
+slice is for extracting a portion of an array, while splice is for adding, removing, or replacing elements within an array.
+
+Return Value:
+slice returns a new array containing the extracted elements, while splice returns an array containing the deleted elements (if any)
+
+65.find findIndex ?
+
+https://www.w3schools.com/jsref/jsref_findindex.asp
+
+66.getter setter ?
+
+In JavaScript, accessor properties are methods that get or set the value of an object. For that, we use these two keywords:
+
+get - to define a getter method to get the property value
+set - to define a setter method to set the property value
+
+const student = {
+
+    // data property
+    firstName: 'Monica',
+    
+    // accessor property(getter)
+    get getName() {
+        return this.firstName;
+    }
+};
+
+// accessing data property
+console.log(student.firstName); // Monica
+
+
+
+
+
+const student = {
+    firstName: 'Monica',
+    
+    //accessor property(setter)
+    set changeName(newName) {
+        this.firstName = newName;
+    }
+};
+
+console.log(student.firstName); // Monica
+
+67.exception handling ?
+try…catch statements
+try…catch…finally statements.
+
+68.http error interceptor ?
+An error interceptor is a special type of interceptor which is used for handling errors that arise while making an HTTP request.
+The error may come in either the client-side (browser) or it may be an error from the server-side when the request fails due to any reason.
+
+req – The outgoing request object to handle.
+next – The next interceptor in the chain, or the backend if no interceptors remain in the chain.
+Returns: an observable of the event stream.
+ 
+69.keyClock ?
+Keycloak is an open-source Identity and Access Management (IAM) solution that can be seamlessly integrated with Angular applications.
+It provides a robust and comprehensive set of features for managing user authentication, authorization, and single sign-on (SSO).
+
+70.unit test case for parent and children ?
+
+
+Imports: Import necessary modules from Angular testing library and the components under test.
+
+beforeEach: Configure the testing module, declaring both parent and child components.
+
+it('should create'): Tests if the parent component is created successfully.
+
+it('should pass data to child component'):
+Sets the dataToChild property on the parent component.
+
+Detects changes to trigger Angular's change detection mechanism.
+Gets a reference to the child component instance using By.directive.
+
+Asserts that the dataFromParent property on the child component matches the data passed from the parent.
+
+it('should receive data from child component'):
+
+Gets a reference to the child component instance.
+Emits an event from the child component using dataEmitter.
+Detects changes.
+Asserts that the dataFromChild property on the parent component matches the data emitted by the child.
+
+71.What is the USe of Angular Polyfills ? 
+
+polyfills are js scripts or modules included in tha angular appln to ensure old browser compatibality.
+
+it enables angular appln to run smoothly and consistently across differnt environment.
+
+it deals with isuuses of not supporting modern futures of js in older browser like promise , observables  and other modern js apis .
+
+Zone.js is a critical part of Angular's change detection mechanism.
+ It is a JavaScript library that provides execution context and hooks into asynchronous operations.
+ In simpler terms, Zone.js helps Angular keep track of all the asynchronous tasks and events that occur in your application and manage their execution.
+ 
+72.Explain View Child And Children ?
+
+ViewChild and ViewChildren are decorators in Angular that allow you to access and manipulate components, directives, and DOM elements:
+
+ViewChild
+Returns the first matching component. You can use this to access a child component's properties and methods, or to query one element from the DOM.
+
+ViewChildren
+Returns all matching components as a QueryList of items. You can use this to access multiple elements.
+
+73.What are the Contents In Angular.Json ?
+
+The angular.json file is the configuration file for your Angular workspace and projects. Here's an overview of the main sections and their contents:
+
+Top-Level Properties:
+
+version: The version of the configuration file format.
+newProjectRoot: The default directory for newly generated projects within the workspace.
+defaultProject: The name of the default project in the workspace.
+cli: Contains configuration options for the Angular CLI itself.
+schematics: Defines schematics configurations for generating code with the CLI.
+projects: Contains configuration for each project in the workspace.
+
+Project-Specific Properties (within projects):
+
+projectType: The type of project (application or library).
+root: The root directory of the project.
+sourceRoot: The directory containing the project's source files.
+prefix: The prefix used for components and directives generated within the project.
+architect: Contains configurations for various build, serve, and test targets for the project.
+
+Architect Targets:
+
+build: Configuration for building the project.
+serve: Configuration for serving the project locally.
+test: Configuration for running unit tests.
+e2e: Configuration for running end-to-end tests.
+lint: Configuration for linting code.
+
+74.Print the duplicate characters in given String type array ?
+
+let duplicate=(str)=>{
+    let count=1;
+    let res=" ";
+
+    for(let i=0;i<str.length;i++){
+        if(str[i]==str[i+1]){
+            count++;
+            res=str[i];
+        }  
+    }
+    if(count>1){
+        console.log(res + ", count = " + count);
+    }
+}
+
+duplicate("hello");
+
+
+example 2 : 
+
+const duplicateChar = (str) => {
+    const duplicate = {}
+    for (charcter of str) {
+        duplicate[charcter] = (duplicate[charcter] || 0) + 1;
+    }
+    return Object.entries(duplicate).
+        filter(([key, value]) => value > 1).
+        map(([key, value]) => value.length);
+
+}
+
+console.log(duplicateChar("heello"));
+
+75.Inter Components Communication ?
+
+Parent-Child component communication
+Observable as a service
+Event Bus
+
+https://rajath8venkatesh.medium.com/inter-component-communication-in-angular-e99e9c939446
+
+
+
+https://github.com/sudheerj/javascript-interview-questions?tab=readme-ov-file#what-is-an-async-function
+
+76.Calling api before components initialized ?
+
+https://medium.com/@mohd2sh/load-data-before-the-app-starts-in-angular-2-3b1927aa502c
+
+77. Signals ? 
+
+A signal is a wrapper around a value that can notify interested consumers when that value changes. 
+Signals can contain any value, from simple primitives to complex data structures.
+it works on the principle of CD ;
+let x=signal(5);
+it provide notification when value is changed.
+
+78.rxjs opertors and Higher order ?
+
+Higher-Order Mapping: These are Rxjs operators used to map source observable values into other observables
+*mergeMap,concatMap,switch map.
+
+https://blog.stackademic.com/rxjs-operators-in-angular-af796f8e7921
+
+79.Diiference between map,filter ,foreach and reduce ?
+
+https://mathursanb.medium.com/map-vs-filter-vs-reduce-in-js-5977e0729039
+let students = [
+    { id: 1212, name: 'John' , course:"IT",marks:87},
+    { id: 2421, name: 'Peter', course:"SE",marks:88},
+    { id: 2632, name: 'Kevin', course:"SE",marks:86},
+    { id: 4834, name: 'Sam',   course:"IT",marks:85}
+];
+
+let tot = students.reduce((acc,student)=>{
+     console.log(acc)
+     return student.marks + acc
+},0)
+
+forEach 2 doesn’t return anything, reduce 1 returns the result of running the reducer callback function.
+
+80.Standalone components ?
+A standalone component is a type of component which is not part of any Angular module. It provides a simplified way to build Angular applications.
+
+81.What is javascript and how it works ?
+
+JavaScript is a scripting or programming language that allows you to implement complex features on web pages
+https://www.freecodecamp.org/news/how-javascript-works-behind-the-scenes
+
+82.Types of Api ?
+openaApi-rest
+private 
+partner 
+composit
+
+Rest Api; representational state transfer
+
+https://www.freecodecamp.org/news/what-is-rest-rest-api-definition-for-beginners/
+
+83.Types of Directives ?
+
+Directives are defined as classes that can add new behavior to the elements in the template or modify existing behavior.
+
+https://www.tatvasoft.com/outsourcing/2023/06/directives-in-angular.html
+
+84.Forms ?
+
+https://github.com/sudheerj/angular-interview-questions?tab=readme-ov-file#what-are-template-driven-forms
+
+85.Difference between container and container fluid ?
+
+Depending on the width of the viewport that the webpage is being viewed on, the container class gives its div a specific fixed width.
+ These lines don't exist in any form for container-fluid, so its width changes every time the viewport width changes.
+
+
+Use .container-fluid when you want your page to shapeshift with every little difference in its viewport size.
+
+Use .container when you want your page to shapeshift to only 4 kinds of sizes, which are also known as "breakpoints".
+
+86.How to access the single  value form the observable ?
+
+take(1) and first():
+These operators will complete the observable after emitting the first value.
+If the observable emits an error before emitting a value, first() will throw an error, while take(1) will simply complete without emitting a value.
+
+87.difference between map and flatmap in javascript ?
+
+flat()
+Purpose: Flattens a nested array by a specified depth.
+Syntax: array.flat(depth)
+Depth: Optional parameter, defaults to 1. Specifies how many levels deep the flattening should go.
+
+
+flatMap:
+Applies a function to each element of an array, and then flattens the result into a single array.
+It's useful when your transformation function returns an array for each element, and you want to combine them into a single array.
+
+map returns an array with the same structure as the original, while flatMap flattens the result into a single array.
+
+Use Case:
+Use map for simple transformations, and flatMap when dealing with nested arrays or when you need to flatten the result of a mapping operation.
+
+88.Types of JS datatypes ?
+
+A primitive data type is data that has a primitive value (which has no properties or methods). There are 7 types of primitive data types.
+
+string
+number
+boolean
+null
+undefined
+bigint
+symbol
+
+89.Utility classes in bootstrap ?
+utility/helper classes to quickly style elements without using any CSS code.
+Bootstrap includes dozens of utility classes for showing, hiding, aligning, and spacing content.
+
+90.scroll in 250px ?
+
+#container {
+height:250px;
+width:250px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+91.callback and higher order difference ?
+A higher-order function is a function that takes another function(s) as an argument(s) and/or returns a function to its callers.
+A callback function is a function that is passed to another function with the expectation that the other function will call it
+
+Or
+
+A callback function is a function that is passed to another function as an argument and executed after that function completes its task.
+A higher-order function (HOF) is a function that takes one or more functions as arguments or returns a function as a result
+
+92.What is content projection ?
+Content projection is a pattern in which you insert, or project, the content you want to use inside another component.
+
+The ng-content is used to insert the content dynamically inside the component that helps to increase component reusability.
+
+93.Html Tags,Elements,Attributes ?
+HTML Tags are the starting and ending parts of an HTML element. They begin with < symbol and end with > symbol. Whatever is written inside < and > are called tags.
+
+The HTML element consists of both the opening and closing tags as well as what’s inside those tags. It normally consists of some structure that’s used to define the respective tags.
+
+HTML Attributes is used to define the character of an HTML element. It always placed in the opening tag of an element.
+It generally provides additional styling (attribute) to the element.
+
+94.Css Box Model ?
+
+The CSS box model refers to how HTML elements are modeled in browser engines and how the dimensions of those HTML elements are derived from CSS properties.
+The CSS box model is a container that contains multiple properties including borders, margin, padding, and the content itself. 
+It is used to create the design and layout of web pages.
+
+95.Javascript Fetch ?
+The Fetch API interface allows web browser to make HTTP requests to web servers.
+The fetch() method returns a Promise that resolves to a Response object.
+
+The fetch() function is at the core of this API, and it takes one mandatory argument – the URL of the resource you want to fetch.
+Optionally, you can include an object as the second argument, where you can specify various settings such as the HTTP method, headers, and more.
+
+fetch(apiUrl, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(formData),
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(newUserData => {
+    // Process the newly created user data
+    console.log('New User Data:', newUserData);
+  })
+ }
+ 
+96.Async and await ?
+
+https://www.freecodecamp.org/news/javascript-async-await/
+
+97.Version of angular and node ?
+18 angular and 21 node
+
+98.Functional and block scope ?
+
+Function scope: Variables that are declared inside a function are called local variables and in the function scope. Local variables are accessible anywhere inside the function.
+Block scope: Variable that is declared inside a specific block & can't be accessed outside of that block.
+
+99.Webpack ?
+ webpack is module bundler .
+ a tool for modeling /bundeling the source code in conventional chuncks these are again loaded from server to browser.
+ 
+Bundling happens during build .there are 5 bundles are produced
+ 1.inline bundle.js - these scripts are necessary to run the bundle.
+ 2.polyfills -these are required for cross browser compatibality or version compatibality.
+ 3.main- whole appln code is present in main
+ 4.style -for styling the appln
+ 5. vendor - all the 3rd party angular library.
+ 
+100.How angular appln executes ?
+
+https://medium.com/siam-vit/how-an-angular-app-work-behind-the-scenes-angular-flow-dcc4d1df27bd
