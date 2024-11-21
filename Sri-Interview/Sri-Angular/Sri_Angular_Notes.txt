@@ -1010,3 +1010,100 @@ Bundling happens during build .there are 5 bundles are produced
 100.How angular appln executes ?
 
 https://medium.com/siam-vit/how-an-angular-app-work-behind-the-scenes-angular-flow-dcc4d1df27bd
+
+101.Can you explain data sharing between components?
+
+https://fireship.io/lessons/sharing-data-between-angular-components-four-methods/
+
+102.Custom pipes ?
+
+https://www.angularminds.com/blog/creating-custom-pipe-in-angular-a-step-by-step-tutorial
+
+103.What is the generator function, and how is it used?
+
+https://www.geeksforgeeks.org/javascript-function-generator/
+
+104.How do I call multiple APIs concurrently in Angular?
+
+https://stackoverflow.com/questions/53002461/how-to-call-multiple-api-and-subscribe-in-angular-6
+
+https://tacettinsertkaya.medium.com/parallel-api-calls-in-angular-applications-4afa9f03c94d
+
+
+105.Wap to pass an array and return the highest element without any duplicates in that array?
+
+const points = [40, 100, 100, 1,5, 25, 10,10];
+const largest = (points,i)=>{
+    const uniq = [...new Set(points)];
+    uniq.sort((a,b)=>b-a);
+    return uniq[i];
+}
+const index=prompt("enter the index");
+let result = largest(points,index);
+console.log(result);
+
+https://stackoverflow.com/questions/9229645/remove-duplicate-values-from-js-array?page=1&tab=scoredesc#tab-top
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
+106.WAP where you will pass a string, and that string should return all the possible word counts?
+
+const myString = prompt("enter the string");
+let possibleWords=(str)=>{
+   return str.replace(',','').split(' ');
+}
+console.log(possibleWords(myString));
+
+
+SUBSTRINGS:
+
+const myString = prompt("enter the string");
+let possibleWords=(str)=>{
+    let c=0;
+    for( let i=0;i<str.length;i++){
+        for(let j=i+1;j<=str.length;++j){
+            //it is for print number of words
+            // console.log(str.substring(i,j));
+            c++;
+        }
+    }
+    //it is to print count
+    return (console.log(c));
+}
+possibleWords(myString);
+
+107.Implicit Type Coercion ?
+
+https://www.freecodecamp.org/news/coercion-and-type-conversion-in-javascript/
+
+108.Perform this using JavaScript:- [level,yellow, madam] = [true, false,true] ?
+
+let arr = ['level', 'yellow', 'madam'];
+const outputArr = [];
+arr.forEach(element=>{
+let reversedElement = element.split('').reverse().join('');
+if(element === reversedElement){
+outputArr.push(true);
+} else{
+outputArr.push(false);
+}
+})
+console.log('[' + arr.join(', ')+ '] = [' + outputArr.join(', ') + ']');
+
+109.Pipes, impure pipe, write custom pipe syntax ?
+
+https://www.angularminds.com/blog/creating-custom-pipe-in-angular-a-step-by-step-tutorial
+
+110.Switch map and fork tap difference ?
+
+https://umairzaffar.medium.com/angular-rxjs-switchmap-forkjoin-mergemap-c1c20be95702
+
+https://raghuvardhankaranam.medium.com/tap-map-and-switchmap-10cc79006b4a
+
+112.design patterns of Angular ?
+
+https://medium.com/williambastidasblog/most-common-design-patterns-in-angular-what-they-are-and-how-to-apply-them-f0193b85e500
+
+113.draw a chess board in html ?
+
+https://stackoverflow.com/questions/26432492/chessboard-html5-only
